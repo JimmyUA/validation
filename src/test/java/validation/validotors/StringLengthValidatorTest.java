@@ -2,27 +2,25 @@ package validation.validotors;
 
 import domain.length.DtoWithStringLengthConstraint;
 import domain.positive.DtoWithPositiveIntegerConstraint;
-import domain.positive.DtoWithPositiveIntegerConstraintNotIntegerField;
 import org.junit.Before;
 import org.junit.Test;
 import validation.domain.Dto;
 
 import java.lang.reflect.Field;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class StringLengthValidatorTest {
 
     private StringLengthValidator validator;
     private Field fieldToValidate;
     private DtoWithStringLengthConstraint dtoStringLength;
-    private String fourSymbolsString;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         validator = new StringLengthValidator();
         dtoStringLength = new DtoWithStringLengthConstraint();
-        fourSymbolsString = "four";
     }
 
     @Test
