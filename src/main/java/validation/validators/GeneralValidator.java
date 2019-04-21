@@ -2,6 +2,7 @@ package validation.validators;
 
 import validation.*;
 import validation.domain.Dto;
+import validation.exception.DtoValidationException;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -60,7 +61,7 @@ public class GeneralValidator {
         try {
             messageMethod = aClass.getMethod("message");
         } catch (NoSuchMethodException e) {
-            return "Validation error";
+            throw new DtoValidationException("Validation error");
         }
         return (String) messageMethod.getDefaultValue();
     }

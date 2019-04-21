@@ -1,6 +1,7 @@
 package validation.validators.validatorspool;
 
 import validation.domain.Dto;
+import validation.exception.DtoValidationException;
 import validation.validators.DtoFieldValidator;
 
 import java.lang.annotation.Annotation;
@@ -34,7 +35,7 @@ public enum  ValidatorsPool {
         try {
             return type.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException("Can not create Validator");
+            throw new DtoValidationException("Can not create Validator", e);
         }
     }
 }
