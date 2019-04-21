@@ -13,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @DtoConstraint(validatedBy = RegexValidator.class)
 public @interface RegexConstraint {
-    String message() default "{javax.validation.constraints.StringLengthValidator.message}";
+    String message() default "{javax.validation.constraints.RegexValidator.message}";
 
     String pattern();
 

@@ -15,10 +15,8 @@ import java.util.stream.Collectors;
 
 public class GeneralValidator {
 
-    private Dto value;
 
     public Set<DtoConstraintViolation> validate(Dto value) {
-        this.value = value;
         DtoValidationContext validationContext = DtoValidationContext.of(value);
         if (!validationContext.hasConstraints()) {
             return Collections.emptySet();
@@ -27,7 +25,7 @@ public class GeneralValidator {
         Map<Field, Set<Annotation>> fieldsWithConstraints = dtoMetadata.getFieldsWithConstraints();
         Set<Set<DtoConstraintViolation>> violations = fieldsWithConstraints
                 .entrySet().stream()
-                .map(this::validateField)
+                .map(entry -> validateField(entry, value))
                 .collect(Collectors.toSet());
         return violations.stream().reduce((first, second) -> {
             first.addAll(second);
@@ -36,13 +34,13 @@ public class GeneralValidator {
                 .orElse(Collections.emptySet());
     }
 
-    private Set<DtoConstraintViolation> validateField(Map.Entry<Field, Set<Annotation>> entry) {
+    private Set<DtoConstraintViolation> validateField(Map.Entry<Field, Set<Annotation>> entry, Dto value) {
         Set<DtoConstraintViolation> fieldViolations = new HashSet<>();
         Field field = entry.getKey();
         Set<Annotation> constraints = entry.getValue();
         constraints.forEach(constraint -> {
             if (!validateByConstraint(constraint, field, value)) {
-                fieldViolations.add(DtoConstraintViolation.from(getConstraintDefaultMessage(constraint)));
+                fieldViolations.add(DtoConstraintViolation.from(getConstraintDefaultMessage(constraint), field.getName()));
             }
         });
         return fieldViolations;
