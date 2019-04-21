@@ -1,9 +1,6 @@
 package validation.validators;
 
-import validation.DtoConstraintViolation;
-import validation.DtoValidationContext;
-import validation.ValidateMetadata;
-import validation.constraints.DtoConstraint;
+import validation.*;
 import validation.domain.Dto;
 
 import java.lang.annotation.Annotation;
@@ -49,18 +46,12 @@ public class GeneralValidator {
         });
         return fieldViolations;
     }
-
+    @SuppressWarnings("unchecked")
     private boolean validateByConstraint(Annotation constraint, Field field, Dto value) {
-        DtoConstraint constraintType = constraint.annotationType().getAnnotation(DtoConstraint.class);
-        Class<? extends DtoFieldValidator<? extends Annotation, ? extends Dto>> validatorClass = constraintType.validatedBy();
-        Object validatorInstance = null;
-        try {
-            validatorInstance = validatorClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            return false;
-        }
-        DtoFieldValidator validatorInstanceCasted = (DtoFieldValidator) validatorInstance;
-        return validatorInstanceCasted.isValid(value, field);
+        DtoFieldValidator validator = new DtoValidatorFactoryImpl().getValidatorInstance(constraint);
+        boolean valid = validator.isValid(value, field);
+        validator.unLock();
+        return valid;
     }
 
     private String getConstraintDefaultMessage(Annotation constraint) {

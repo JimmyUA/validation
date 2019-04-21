@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 
 public class RegexValidator implements DtoFieldValidator<RegexConstraint, Dto> {
 
+    private transient boolean isLocked = false;
     private String regex;
-
 
     @Override
     public void initialize(RegexConstraint constraintAnnotation) {
@@ -31,5 +31,20 @@ public class RegexValidator implements DtoFieldValidator<RegexConstraint, Dto> {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(valueToValidate);
         return matcher.matches();
+    }
+
+    @Override
+    public void lock() {
+        isLocked = true;
+    }
+
+    @Override
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    @Override
+    public void unLock() {
+        isLocked = false;
     }
 }

@@ -12,7 +12,7 @@ public interface DtoFieldValidator<A extends Annotation, T extends Dto> {
 
     boolean isValid(T value, Field field);
 
-    default Object getFieldValue(T value, Field field) {
+    default Object getFieldValue(Dto value, Field field) {
         try {
             field.setAccessible(true);
             return field.get(value);
@@ -20,4 +20,10 @@ public interface DtoFieldValidator<A extends Annotation, T extends Dto> {
             throw new RuntimeException("Can not get field value", e);
         }
     }
+
+    void lock();
+
+    boolean isLocked();
+
+    void unLock();
 }

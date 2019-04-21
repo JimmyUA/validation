@@ -7,6 +7,8 @@ import java.lang.reflect.Field;
 
 public class PositiveIntegerValidator implements DtoFieldValidator<PositiveInteger, Dto> {
 
+    private transient boolean isLocked = false;
+
     @Override
     public boolean isValid(Dto value, Field field) {
         Object fieldValue = getFieldValue(value, field);
@@ -19,5 +21,20 @@ public class PositiveIntegerValidator implements DtoFieldValidator<PositiveInteg
         }
 
         return false;
+    }
+
+    @Override
+    public void lock() {
+        isLocked = true;
+    }
+
+    @Override
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    @Override
+    public void unLock() {
+        isLocked = false;
     }
 }

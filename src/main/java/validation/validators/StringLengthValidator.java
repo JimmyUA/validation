@@ -9,6 +9,7 @@ public class StringLengthValidator implements DtoFieldValidator<StringLength, Dt
 
     private int min;
     private int max;
+    private transient boolean isLocked = false;
 
     @Override
     public void initialize(StringLength constraintAnnotation) {
@@ -30,5 +31,20 @@ public class StringLengthValidator implements DtoFieldValidator<StringLength, Dt
         int stringLength = stringToValidate.length();
 
         return stringLength < max && stringLength > min;
+    }
+
+    @Override
+    public void lock() {
+        isLocked = true;
+    }
+
+    @Override
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    @Override
+    public void unLock() {
+        isLocked = false;
     }
 }

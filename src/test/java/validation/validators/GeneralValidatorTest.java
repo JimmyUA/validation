@@ -1,7 +1,6 @@
 package validation.validators;
 
 import domain.DtoWithNotNullConstraint;
-import domain.NoAnnotationsDto;
 import domain.NonConstraintsAnnotationsDto;
 import domain.general.DtoTwoConstraintsOnOneField;
 import org.junit.Before;
@@ -9,9 +8,7 @@ import org.junit.Test;
 import validation.DtoConstraintViolation;
 import validation.constraints.NotNull;
 import validation.constraints.StringLength;
-import validation.domain.Dto;
 
-import javax.validation.ConstraintViolation;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -53,4 +50,6 @@ public class GeneralValidatorTest {
         assertEquals(1, violations.size());
         assertTrue(violations.contains(DtoConstraintViolation.from((String) StringLength.class.getMethod("message").getDefaultValue())));
     }
+
+    
 }
