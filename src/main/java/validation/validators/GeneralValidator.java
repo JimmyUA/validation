@@ -47,7 +47,7 @@ public class GeneralValidator {
     }
     @SuppressWarnings("unchecked")
     private boolean validateByConstraint(Annotation constraint, Field field, Dto value) {
-        DtoFieldValidator validator = new DtoValidatorFactoryImpl().getValidatorInstance(constraint);
+        DtoFieldValidator validator = DtoValidatorFactory.getSimpleFactory().getValidatorInstance(constraint);
         boolean valid = validator.isValid(value, field);
         validator.unLock();
         return valid;

@@ -8,4 +8,8 @@ import java.lang.annotation.Annotation;
 public interface DtoValidatorFactory {
 
     DtoFieldValidator<? extends Annotation, ? extends Dto> getValidatorInstance(Annotation constraint);
+
+    static DtoValidatorFactory getSimpleFactory(){
+        return DtoValidatorFactoryImpl.SIMPLE_FACTORY;
+    }
 }
