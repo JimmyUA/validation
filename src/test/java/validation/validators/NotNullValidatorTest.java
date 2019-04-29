@@ -1,10 +1,9 @@
-package validation.validotors;
+package validation.validators;
 
 import domain.DtoWithNotNullConstraint;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.ConstraintValidatorContext;
 import java.lang.reflect.Field;
 
 import static org.junit.Assert.assertFalse;

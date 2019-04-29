@@ -1,4 +1,4 @@
-package validation.validotors;
+package validation.validators;
 
 import validation.constraints.StringLength;
 import validation.domain.Dto;

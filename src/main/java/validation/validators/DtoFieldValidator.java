@@ -1,9 +1,11 @@
-package validation.validotors;
+package validation.validators;
+
+import validation.domain.Dto;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public interface DtoFieldValidator<A extends Annotation, T> {
+public interface DtoFieldValidator<A extends Annotation, T extends Dto> {
 
     default void initialize(A constraintAnnotation) {
     }

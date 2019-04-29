@@ -43,4 +43,8 @@ public class ValidateMetadata {
     public boolean hasConstraints() {
         return !fieldsWithConstraints.isEmpty();
     }
+
+    public Map<Field, Set<Annotation>> getFieldsWithConstraints() {
+        return fieldsWithConstraints;
+    }
 }

@@ -1,4 +1,4 @@
-package validation.validotors;
+package validation.validators;
 
 import domain.positive.DtoWithPositiveIntegerConstraint;
 import domain.positive.DtoWithPositiveIntegerConstraintNotIntegerField;

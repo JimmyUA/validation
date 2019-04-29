@@ -16,4 +16,8 @@ public class DtoValidationContext {
     public boolean hasConstraints() {
         return metadata.hasConstraints();
     }
+
+    public ValidateMetadata getMetadata() {
+        return metadata;
+    }
 }

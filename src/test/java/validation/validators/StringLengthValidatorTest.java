@@ -1,4 +1,4 @@
-package validation.validotors;
+package validation.validators;
 
 import domain.length.DtoWithStringLengthConstraint;
 import domain.positive.DtoWithPositiveIntegerConstraint;

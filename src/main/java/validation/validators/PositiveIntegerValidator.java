@@ -1,4 +1,4 @@
-package validation.validotors;
+package validation.validators;
 
 import validation.constraints.PositiveInteger;
 import validation.domain.Dto;
